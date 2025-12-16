@@ -510,7 +510,7 @@ figure figcaption {
 }
 #fh5co-main .fh5co-narrow-content {
   position: relative;
-  width: 93%;
+  width: 1900px;
   margin: 0px auto;
   padding-top: 3em;
   clear: both;
@@ -1728,7 +1728,12 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 .benefit-item h4 {
   color: #030591;
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: 600;
+}
+.benefit-item p {
+  margin-top:2em;
+  color: #000;
 }
 
 /* 调整可获得标题与其下方内容的间距 */
