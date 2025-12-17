@@ -1,2 +1,2 @@
 # Team_introduction
-SKLIIS-IoT小分队
+SKLIIS IoT小分队
