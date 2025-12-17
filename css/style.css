@@ -159,7 +159,7 @@ body {
   font-size: 18px;
   line-height: 1.6;
   color: rgba(0, 0, 0, 0.5);
-  background: rgb(195, 22, 22);
+  background-color: transparent;
   background-image: url('../images/背景.jpg');
   background-size: cover;
   background-position: center;
@@ -167,6 +167,9 @@ body {
   background-repeat: no-repeat;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Particles.js 样式 */
@@ -265,25 +268,30 @@ figure figcaption {
 #fh5co-page {
   width: 100%;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   background-color: rgba(255, 255, 255, 0.7);
 }
 
 #fh5co-aside {
-  padding-top: 60px;
-  padding-bottom: 40px;
+  padding-top: clamp(20px, 6vh, 60px);
+  padding-bottom: clamp(15px, 4vh, 40px);
   width: 20%;
   position: fixed;
   bottom: 0;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
+  overflow-x: hidden;
   z-index: 1001;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
   background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 @media screen and (max-width: 1200px) {
   #fh5co-aside {
@@ -304,16 +312,28 @@ figure figcaption {
   text-align: center;
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 700;
-  margin-bottom: 2em;
+  margin-bottom: clamp(0.8em, 2vh, 2em);
   text-transform: uppercase;
-  font-size: 34px;
-  padding: 15px 10px;
-  transition: all 0.3s ease;
+  font-size: clamp(22px, 3.5vh, 34px);
+  padding: clamp(5px, 1.5vh, 15px) clamp(5px, 1vh, 10px);
+  transition: font-size 0.3s ease, padding 0.3s ease, margin-bottom 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 @media screen and (max-width: 768px) {
   #fh5co-aside #fh5co-logo {
     margin-bottom: 1em;
     font-size: 26px;
+    white-space: nowrap;
+  }
+  
+  #fh5co-aside #fh5co-logo a {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+  
+  #fh5co-aside #fh5co-logo a img {
+    flex-shrink: 0;
   }
 }
 #fh5co-aside #fh5co-logo a {
@@ -326,6 +346,7 @@ figure figcaption {
   transition: all 0.3s ease;
   padding: 8px 12px;
   border-radius: 8px;
+  white-space: nowrap;
 }
 #fh5co-aside #fh5co-logo a:hover {
   color: #030591;
@@ -374,11 +395,74 @@ figure figcaption {
   font-weight: 300;
   color: rgba(0, 0, 0, 0.5);
 }
+#fh5co-aside #fh5co-main-menu {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  justify-content: flex-start;
+  gap: 0;
+}
+
 #fh5co-aside #fh5co-main-menu ul {
   text-align: center;
   margin: 0;
   padding: 0;
+  flex-shrink: 0;
 }
+
+#fh5co-aside #fh5co-main-menu > div:not(:last-child) {
+  flex-shrink: 1;
+  flex-basis: auto;
+  transition: margin-top 0.3s ease;
+  margin-top: clamp(1.5em, 5vh, 5em) !important;
+}
+
+#fh5co-aside #fh5co-main-menu > div:last-child {
+  margin-top: auto !important;
+  padding-top: clamp(0.5em, 2vh, 1.5em);
+  padding-bottom: clamp(0.5em, 2vh, 1.5em);
+  margin-bottom: 0 !important;
+  flex-shrink: 0;
+  font-size: clamp(12px, 1.5vh, 16px);
+  width: 100%;
+  text-align: center;
+  align-self: stretch;
+}
+
+#fh5co-aside #fh5co-main-menu > div img {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* 导航栏标语图片自适应 */
+#fh5co-aside #fh5co-main-menu > div img[src*="导航栏标语"]:not([src*="冲鸭"]) {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+/* 冲鸭图片自适应 - 占据剩余高度 */
+#fh5co-aside #fh5co-main-menu > div:nth-last-child(2) {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+#fh5co-aside #fh5co-main-menu > div img[src*="冲鸭"] {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+}
+
 @media screen and (max-width: 768px) {
   #fh5co-aside #fh5co-main-menu ul {
     margin: 0 0 2em 0;
@@ -389,7 +473,7 @@ figure figcaption {
   }
 }
 #fh5co-aside #fh5co-main-menu ul li {
-  margin: 0 0 20px 0;
+  margin: 0 0 clamp(10px, 2vh, 20px) 0;
   padding: 0;
   list-style: none;
 }
@@ -398,15 +482,15 @@ figure figcaption {
   text-decoration: none;
   letter-spacing: .1em;
   text-transform: uppercase;
-  font-size: 28px;
+  font-size: clamp(18px, 2.8vh, 28px);
   font-weight: 600;
   position: relative;
-  padding: 12px 10px;
+  padding: clamp(6px, 1.2vh, 12px) clamp(5px, 1vh, 10px);
   letter-spacing: .1em;
   font-family: "Roboto", Arial, sans-serif;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
-  transition: 0.3s;
+  transition: font-size 0.3s ease, padding 0.3s ease;
 }
 #fh5co-aside #fh5co-main-menu ul li a:after {
   content: "";
@@ -494,7 +578,7 @@ figure figcaption {
 #fh5co-main {
   width: 80%;
   float: right;
-  overflow-x: scroll !important;
+  overflow-x: hidden;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
@@ -511,10 +595,14 @@ figure figcaption {
 }
 #fh5co-main .fh5co-narrow-content {
   position: relative;
-  width: 1900px;
+  width: 100%;
+  max-width: 100%;
   margin: 0px auto;
   padding-top: 3em;
+  padding-left: 2em;
+  padding-right: 2em;
   clear: both;
+  box-sizing: border-box;
 }
 @media screen and (max-width: 768px) {
   #fh5co-main .fh5co-narrow-content {
@@ -1453,6 +1541,38 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   font-family: 宋体;
 }
 
+/* 导师信息头部布局 - 文字和座右铭图片 */
+.advisor-header-flex {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.advisor-text-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.advisor-motto-image {
+  flex: 0 1 40%;
+  min-width: 400px;
+  max-width: 1000px;
+  margin-right: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.advisor-motto-image img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  object-fit: contain;
+}
+
 .advisor-info h3 {
   color: #030591;
   font-size: 28px;
@@ -1531,6 +1651,42 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   
   .advisor-info h4 {
     font-size: 18px;
+  }
+  
+  /* 修复导师信息页面的图片 */
+  .advisor-info img {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  /* 修复flex布局在小屏幕上的问题 */
+  .advisor-header-flex {
+    flex-direction: column !important;
+  }
+  
+  .advisor-text-info {
+    width: 100% !important;
+    min-width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+  
+  .advisor-motto-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    margin-top: 20px;
+    margin-right: 0 !important;
+    min-width: 100% !important;
+  }
+  
+  /* 确保导师座右铭图片在小屏幕上完全自适应 */
+  .advisor-motto-image img {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
   }
 }
 
@@ -1717,8 +1873,12 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   border-left: 4px solid #030591;
   padding: 20px;
   margin-bottom: 20px;
+  margin-left: 0;
+  margin-right: 0;
   border-radius: 0 7px 7px 0;
   transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .benefit-item:hover {
@@ -1740,6 +1900,43 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 /* 调整可获得标题与其下方内容的间距 */
 .team-section + .row.row-bottom-padded-md {
   margin-top: -0.5em;
+}
+
+/* 确保benefit-item区块的左右对齐 */
+.row.row-bottom-padded-md {
+  margin-left: -15px;
+  margin-right: -15px;
+  clear: both;
+}
+
+.row.row-bottom-padded-md > .col-md-6 {
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+/* 确保所有benefit-item区块高度一致，便于对齐 */
+.row.row-bottom-padded-md .benefit-item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* 确保所有包含benefit-item的行都从同一位置开始 */
+#fh5co-main .fh5co-narrow-content .row.row-bottom-padded-md {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+/* 确保team-intro区块对齐 */
+.row.row-bottom-padded-md .team-intro {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .position-item {
@@ -1836,12 +2033,38 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   min-height: 350px;
   padding-left: 15px;
   padding-right: 15px;
+  box-sizing: border-box;
+}
+
+/* 确保图片列不扩展，文字列占据剩余空间 */
+.team-section .row .col-md-6:first-child {
+  flex: 0 0 auto;
+}
+
+.team-section .row .col-md-6:last-child {
+  flex: 1 1 auto;
 }
 
 /* 重置Bootstrap列间距 */
 .team-section .row {
   margin-left: -15px;
   margin-right: -15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 确保图片列不扩展，文字列占据剩余空间 */
+.team-section .row .col-md-6:first-child {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+.team-section .row .col-md-6:last-child {
+  flex: 1 1 0 !important;
+  min-width: 0;
+  max-width: none !important;
+  width: auto !important;
 }
 
 /* 研究领域的row不需要负margin，保持与上面白色区块对齐 */
@@ -1872,42 +2095,87 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   padding-bottom: 3em;
 }
 
-/* 图片容器样式 */
-.image-container {
-  width: 80%;
-  display: block;
-  justify-content: center;
-  align-items: center;
-  padding: 1px;
-}
-
-/* 内容容器样式 */
-.content-container {
-  padding: 1px;
+/* 确保图片区块与content-container对齐 */
+.team-section .col-md-6 .content-container {
   width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
 }
 
-/* 统一白色区块的对齐 - 确保所有模块的白色区块左右对齐 */
-.team-section .content-container p[style*="background-color: rgba(255, 255, 255, 0.9)"] {
-  margin-left: 2em !important;
-  margin-right: 2em !important;
+/* 内容容器样式 - 统一对齐 */
+.content-container {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 内容文本样式 - 统一对齐 */
+.content-text {
+  color: #000;
+  text-indent: 2em;
+  text-align: justify;
+  margin: 0;
+  font-family: '宋体';
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  line-height: 2;
+}
+
+/* 图片行样式 - 与文字块对齐 */
+.content-container .image-row {
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.content-container .image-row .img-container {
+  text-align: center;
+}
+
+.content-container .image-row img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border-radius: 5px;
+}
+
+/* 研究领域图片特殊处理 */
+.content-container .image-row img[src*="IoT.png"] {
+  max-width: 70%;
 }
 
 /* 确保col-md-12的padding与col-md-6一致 */
 .team-section .col-md-12 {
   padding-left: 15px;
   padding-right: 15px;
+  box-sizing: border-box;
 }
 
-/* 区块标题样式 */
+/* 确保col-md-6的对齐 */
+.team-section .col-md-6 {
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+/* 区块标题样式 - 统一对齐 */
 .section-title {
   font-size: 22px;
   color: #030591;
   margin-bottom: 15px;
+  margin-top: 0;
   font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
   line-height: 1.3;
+  text-align: left;
 }
 
 /* 团队图片样式 */
@@ -1919,9 +2187,20 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   max-width: 100%;
   height: auto;
   max-height: 280px;
-  margin: auto;
   display: block;
   object-fit: contain;
+}
+
+/* 宝可梦图片垂直方向下对齐 */
+.team-section .col-md-4 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.team-image[src*="宝可梦"] {
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 .team-image:hover {
@@ -1955,12 +2234,12 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
     margin-right: -4px;
   }
   
-  .image-container {
-    padding: 1px;
-  }
-  
   .content-container {
     padding: 1px;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   
   .section-title {
@@ -1970,12 +2249,35 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   
   .team-image {
     max-height: 220px;
+    max-width: 100% !important;
+    width: auto !important;
+    transform: none !important;
   }
   
   .team-image[alt*="工业互联网安全山西省重点实验室"],
   .team-image[alt*="团队标志"] {
     max-width: 200px;
     max-height: 150px;
+  }
+  
+  /* 确保所有图片在小屏幕上响应式 */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* 修复负边距问题 */
+  .content-container[style*="margin-left"] {
+    margin-left: 0 !important;
+  }
+  
+  .content-container[style*="margin-right"] {
+    margin-right: 0 !important;
+  }
+  
+  /* 修复固定宽度问题 */
+  .content-container[style*="width:250%"] {
+    width: 100% !important;
   }
 }
 
@@ -2272,6 +2574,9 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   text-align: center;
   color: #000;
 }
+.member-info p {
+  color: #000;
+}
 
 .member-info h3 {
   font-size: 22px;
@@ -2372,6 +2677,8 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   border-bottom: 2px solid #eaeaea;
   position: relative;
   font-weight: 600;
+  margin-top: 0;
+  text-align: left;
 }
 
 .team-section .section-title:after {
@@ -2425,6 +2732,80 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
     height: 32px;
     line-height: 32px;
     margin: 0 3px;
+  }
+}
+
+/* 全局响应式修复 - 防止横向滚动 */
+* {
+  box-sizing: border-box;
+}
+
+/* 确保所有容器不会超出视口 */
+.container,
+.row,
+[class*="col-"] {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 修复所有可能的固定宽度元素 */
+[style*="width: 250%"],
+[style*="width:250%"],
+[style*="width: 450px"],
+[style*="width: 500px"] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* 特别处理导师座右铭图片 - 只在特定容器内 */
+.advisor-motto-image img {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* 修复所有负边距问题 */
+[style*="margin-left: -"],
+[style*="margin-left:-"],
+[style*="margin-right: -"],
+[style*="margin-right:-"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 修复transform scale问题 */
+@media screen and (max-width: 992px) {
+  [style*="transform: scale"] {
+    transform: none !important;
+  }
+}
+
+/* 确保所有图片和媒体元素响应式 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 确保导航栏中的图片也响应式 */
+#fh5co-aside img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 修复可能的表格和列表溢出 */
+table {
+  width: 100%;
+  max-width: 100%;
+  table-layout: auto;
+}
+
+/* 确保所有Bootstrap列不会溢出 */
+@media screen and (max-width: 768px) {
+  [class*="col-"] {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 
