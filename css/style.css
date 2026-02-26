@@ -2526,6 +2526,278 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   }
 }
 
+/* 论文卡片样式 */
+.paper-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+}
+
+.paper-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  overflow: hidden;
+  border-top: 4px solid #030591;
+  cursor: pointer;
+  position: relative;
+}
+
+.paper-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-top-color: #1e40af;
+}
+
+.paper-card.expanded {
+  cursor: default;
+  transform: none;
+}
+
+.paper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.paper-type {
+  display: inline-block;
+  padding: 4px 14px;
+  background: linear-gradient(135deg, #030591 0%, #1e40af 100%);
+  color: #fff;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.paper-year {
+  display: inline-block;
+  padding: 4px 14px;
+  background: #f0f4ff;
+  color: #030591;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.paper-title {
+  color: #030591;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 15px 20px 12px;
+  line-height: 1.4;
+}
+
+.paper-meta {
+  padding: 0 20px 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.paper-journal {
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.paper-authors {
+  color: #333;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.paper-authors i {
+  color: #030591;
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.paper-abstract {
+  padding: 15px 20px;
+}
+
+.paper-abstract h4 {
+  color: #030591;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.paper-abstract h4 i {
+  margin-right: 6px;
+  color: #030591;
+}
+
+.paper-abstract p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  text-align: justify;
+}
+
+.paper-detail {
+  background: #f8f9fa;
+  padding: 20px;
+  border-top: 2px solid #e0e0e0;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-section {
+  margin-bottom: 20px;
+}
+
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.detail-section h4 {
+  color: #030591;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.detail-section h4 i {
+  margin-right: 6px;
+  color: #030591;
+}
+
+.detail-section p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  text-align: justify;
+}
+
+.detail-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.detail-section li {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.download-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.download-links .btn {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.paper-footer {
+  padding: 10px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, #fff 0%, #f8f9fa 100%);
+  border-top: 1px solid #f0f0f0;
+}
+
+.view-hint {
+  color: #999;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.view-hint i {
+  transition: transform 0.3s ease;
+}
+
+.paper-card:hover .view-hint {
+  color: #030591;
+}
+
+.paper-card:hover .view-hint i {
+  transform: translateY(3px);
+}
+
+.paper-card.expanded .view-hint {
+  display: none;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 992px) {
+  .paper-grid {
+    margin: 0;
+  }
+  
+  .paper-card {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .paper-title {
+    font-size: 18px;
+    margin: 12px 15px 10px;
+  }
+  
+  .paper-header,
+  .paper-meta,
+  .paper-abstract,
+  .paper-detail {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .paper-journal {
+    font-size: 13px;
+  }
+  
+  .paper-authors {
+    font-size: 13px;
+  }
+  
+  .paper-abstract p,
+  .detail-section p,
+  .detail-section li {
+    font-size: 13px;
+  }
+  
+  .download-links {
+    flex-direction: column;
+  }
+  
+  .download-links .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
 /* 团队成员页面样式 */
 
 /* 团队成员卡片样式 */
