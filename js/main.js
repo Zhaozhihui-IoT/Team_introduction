@@ -142,5 +142,26 @@
     burgerMenu();
     mobileMenuOutsideClick();
     sliderMain();
+    
+    // 论文详情展开/收起功能
+    window.togglePaperDetail = function(paperId) {
+      var detailDiv = document.getElementById('paper-detail-' + paperId);
+      var paperCard = detailDiv.closest('.paper-card');
+      
+      if (detailDiv.style.display === 'none' || detailDiv.style.display === '') {
+        // 展开详情
+        detailDiv.style.display = 'block';
+        paperCard.classList.add('expanded');
+        
+        // 滚动到详情区域
+        setTimeout(function() {
+          detailDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+      } else {
+        // 收起详情
+        detailDiv.style.display = 'none';
+        paperCard.classList.remove('expanded');
+      }
+    };
   });
 })();
