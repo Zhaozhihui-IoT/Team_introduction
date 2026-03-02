@@ -2538,11 +2538,14 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  height: 100%;
+  height: 420px;
+  min-height: 420px;
   overflow: hidden;
   border-top: 4px solid #030591;
   cursor: pointer;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .paper-card:hover {
@@ -2554,6 +2557,8 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 .paper-card.expanded {
   cursor: default;
   transform: none;
+  height: auto;
+  min-height: 420px;
 }
 
 .paper-header {
@@ -2620,6 +2625,10 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
 
 .paper-abstract {
   padding: 15px 20px;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .paper-abstract h4 {
@@ -2629,6 +2638,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .paper-abstract h4 i {
@@ -2642,6 +2652,17 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   line-height: 1.7;
   margin: 0;
   text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.paper-card.expanded .paper-abstract p {
+  display: block;
+  -webkit-line-clamp: unset;
+  text-overflow: unset;
 }
 
 .paper-detail {
@@ -2649,6 +2670,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   padding: 20px;
   border-top: 2px solid #e0e0e0;
   animation: slideDown 0.3s ease;
+  overflow: visible;
 }
 
 @keyframes slideDown {
@@ -2720,6 +2742,7 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   text-align: center;
   background: linear-gradient(to bottom, #fff 0%, #f8f9fa 100%);
   border-top: 1px solid #f0f0f0;
+  flex-shrink: 0;
 }
 
 .view-hint {
@@ -2753,18 +2776,27 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
   .paper-grid {
     margin: 0;
   }
-  
+
   .paper-card {
     margin-bottom: 20px;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .paper-card {
+    height: auto;
+    min-height: 380px;
+  }
+
+  .paper-card.expanded {
+    min-height: 380px;
+  }
+
   .paper-title {
     font-size: 18px;
     margin: 12px 15px 10px;
   }
-  
+
   .paper-header,
   .paper-meta,
   .paper-abstract,
@@ -2772,25 +2804,29 @@ body.offcanvas #fh5co-main, body.offcanvas .fh5co-nav-toggle {
     padding-left: 15px;
     padding-right: 15px;
   }
-  
+
   .paper-journal {
     font-size: 13px;
   }
-  
+
   .paper-authors {
     font-size: 13px;
   }
-  
+
   .paper-abstract p,
   .detail-section p,
   .detail-section li {
     font-size: 13px;
   }
-  
+
+  .paper-abstract p {
+    -webkit-line-clamp: 4;
+  }
+
   .download-links {
     flex-direction: column;
   }
-  
+
   .download-links .btn {
     width: 100%;
     text-align: center;
